@@ -1,0 +1,20 @@
+
+# Editor-specific
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.settings
+.vscode
+
+# Artifacts
+/dist
+
+# TypeScript
+node_modules/
+
+# Misc/system
+npm-debug.log
+.DS_STORE
+.eslintcache
+Thumbs.db
