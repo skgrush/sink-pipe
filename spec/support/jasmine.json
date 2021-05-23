@@ -1,0 +1,16 @@
+{
+  "reporters": [
+    {
+      "name": "jasmine-spec-reporter#SpecReporter"
+    }
+  ],
+  "spec_dir": "spec",
+  "spec_files": [
+    "**/*.spec.ts"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}
