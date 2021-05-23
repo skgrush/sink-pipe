@@ -8,7 +8,7 @@
 .vscode
 
 # Artifacts
-/dist
+/lib
 
 # TypeScript
 node_modules/
