@@ -1,0 +1,29 @@
+{
+  "name": "sink-pipe",
+  "version": "0.0.1",
+  "description": "For synchronous use of RxJS pipe operators",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skgrush/sink-pipe.git"
+  },
+  "keywords": [
+    "rxjs"
+  ],
+  "author": "Samuel K. Grush <Samuel@Grush.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skgrush/sink-pipe/issues"
+  },
+  "homepage": "https://github.com/skgrush/sink-pipe#readme",
+  "devDependencies": {
+    "jasmine": "^3.7.0",
+    "rxjs": "^6.6.7",
+    "typescript": "^4.2.4"
+  }
+}
