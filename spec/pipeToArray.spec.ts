@@ -1,5 +1,5 @@
 import { timer } from 'rxjs';
-import { filter, map, switchMap, tap, throttleTime } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap, throttleTime } from 'rxjs/operators';
 import { pipeToArray } from '../src/pipeToArray';
 import { SynchronousFailureError } from '../src/SynchronousFailureError';
 
@@ -61,5 +61,23 @@ describe('pipeToArray()', () => {
     }
 
     expect(testBody).toThrowError(SynchronousFailureError);
+  });
+
+  it('should handle generator', () => {
+
+    function* allNaturalNumbers() {
+      let i = 1;
+      while(true) {
+        yield i++;
+      }
+    }
+
+    const first5evens = pipeToArray(
+      allNaturalNumbers(),
+      filter((i) => i % 2 === 0),
+      take(5),
+    );
+
+    expect(first5evens).toEqual([2, 4, 6, 8, 10]);
   });
 });
