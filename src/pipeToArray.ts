@@ -94,9 +94,9 @@ export function pipeToArray<T, A, B, C, D, E, F, G, H, I>(
 ): Array<unknown>;
 /**
  * Pipeline the values of the input iterable
- * @param input
- * @param operations
- * @returns
+ * @param input - a pipeable value, i.e. a synchronous iterable.
+ * @param operations - a spread chain of operations from RxJS operators.
+ * @returns an array of the values synchronously output by operation chain.
  */
 export function pipeToArray<T>(
   input: Pipeable<T>,
@@ -121,7 +121,7 @@ export function pipeToArray<T>(
   // fourth check that the values were resolved synchronously
   if (!outputs) {
     subscription.unsubscribe();
-    throw new SynchronousFailureError('Failed to synchronously resolve')
+    throw new SynchronousFailureError('Failed to synchronously resolve');
   }
 
   // if we've made it this far, the outputs are resolved and `from` closed
