@@ -1,4 +1,4 @@
-import { filter } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { pipeToGenerator } from '../src/pipeToGenerator';
 
 
@@ -36,4 +36,26 @@ describe('pipeToGenerator()', () => {
       expect(actualOutputArray).toEqual([]);
     });
   });
+
+  it('should not eagerly evaluate input', () => {
+    function* inputGenerator(i = 1) {
+      while (true) {
+        yield i;
+        i *= 10;
+      }
+    }
+    const expectedOutput = [1, 10, 100, 1000, 10000];
+
+    let numberOfOperatorCalls = 0;
+
+    const actualOutput = pipeToGenerator(
+      inputGenerator(),
+      tap(() => numberOfOperatorCalls++),
+      take(5),
+    );
+    const actualOutputArray = [...actualOutput];
+
+    expect(actualOutputArray).toEqual(expectedOutput);
+    expect(numberOfOperatorCalls).toBe(5);
+  })
 });
