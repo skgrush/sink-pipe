@@ -63,3 +63,10 @@ console.log(first5evens);
 
 - Experimenting with using RxJS operators synchronously with iterables.
 - Maintaining a _minimal_ npm package.
+
+## TODOs
+
+- [ ] `pipeToGenerator` appears to be eagerly evaluating the whole pipe,
+      rather than waiting on the generator consumer.
+      [See pipeToGenerator.spec.ts](/spec/pipeToGenerator.spec.ts)
+      "should not eagerly evaluate input > per-item".

@@ -37,25 +37,52 @@ describe('pipeToGenerator()', () => {
     });
   });
 
-  it('should not eagerly evaluate input', () => {
+  describe('should not eagerly evaluate input', () => {
     function* inputGenerator(i = 1) {
       while (true) {
         yield i;
         i *= 10;
       }
     }
-    const expectedOutput = [1, 10, 100, 1000, 10000];
+    const expectedOutput = Object.freeze([1, 10, 100, 1000, 10000]);
 
-    let numberOfOperatorCalls = 0;
+    it('overall', () => {
+      let numberOfOperatorCalls = 0;
 
-    const actualOutput = pipeToGenerator(
-      inputGenerator(),
-      tap(() => numberOfOperatorCalls++),
-      take(5),
-    );
-    const actualOutputArray = [...actualOutput];
+      const actualOutput = pipeToGenerator(
+        inputGenerator(),
+        tap(() => numberOfOperatorCalls++),
+        take(5),
+      );
+      const actualOutputArray = [...actualOutput];
 
-    expect(actualOutputArray).toEqual(expectedOutput);
-    expect(numberOfOperatorCalls).toBe(5);
-  })
+      expect(actualOutputArray).toEqual(expectedOutput);
+      expect(numberOfOperatorCalls).toBe(5);
+    });
+
+    it('per-item', () => {
+      let numberOfOperatorCalls = 0;
+
+      const actualOutput = pipeToGenerator(
+        inputGenerator(),
+        tap(() => numberOfOperatorCalls++),
+        tap((i) => console.log('per-item', i)),
+        take(5),
+      );
+
+      const first = actualOutput.next().value;
+      const callsAfter1 = numberOfOperatorCalls;
+      const second = actualOutput.next().value;
+      const callsAfter2 = numberOfOperatorCalls;
+
+      const rest = [...actualOutput];
+
+      expect(first).toBe(1);
+      expect(second).toBe(10);
+      expect(callsAfter1).toBe(1);
+      expect(callsAfter2).toBe(2);
+      expect(rest).toEqual(expectedOutput.slice(2));
+      expect(numberOfOperatorCalls).toBe(5);
+    });
+  });
 });
