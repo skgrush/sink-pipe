@@ -1,9 +1,8 @@
 import type { Observable, OperatorFunction, UnaryFunction } from 'rxjs';
 import { from } from 'rxjs';
 import { toArray } from 'rxjs/operators';
+import { Pipeable } from './Pipeable';
 import { SynchronousFailureError } from './SynchronousFailureError';
-
-type Pipeable<T> = ArrayLike<T> | Iterable<T>
 
 export function pipeToArray<T>(
   input: Pipeable<T>,
