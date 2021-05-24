@@ -1,3 +1,10 @@
+/**
+ * Typings directly based on RxJS's `pipe()` implementation {https://github.com/ReactiveX/rxjs/blob/f9a60f/src/internal/Observable.ts#L392}
+ * The explicit overloads are necessary because the operator chain types
+ * directly relates each parameter positionally to its neighbors, which cannot
+ * be simplified by variadic typings.
+ */
+
 import type { Observable, OperatorFunction, UnaryFunction } from 'rxjs';
 import { from } from 'rxjs';
 import { toArray } from 'rxjs/operators';

@@ -2,6 +2,13 @@
 
 > For *sync*hronous use of RxJS _pipe_ operators
 
+## Credits
+
+Function typing and operator reducer directly based on RxJS's
+[pipe method](https://github.com/ReactiveX/rxjs/blob/f9a60f/src/internal/Observable.ts#L392)
+and [pipeFromArray implementation](https://github.com/ReactiveX/rxjs/blob/f9a60f/src/internal/util/pipe.ts#L77)
+respectively.
+
 ## Usage
 
 #### Example using an array
