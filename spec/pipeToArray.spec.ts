@@ -1,12 +1,12 @@
 import { timer } from 'rxjs';
-import { filter, map, switchMap, take, tap, throttleTime } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { pipeToArray } from '../src/pipeToArray';
 import { SynchronousFailureError } from '../src/SynchronousFailureError';
 
 
 describe('pipeToArray()', () => {
 
-  it('should simply rebuild lone array', () => {
+  it('should simply rebuild array with no operators', () => {
     const input = Object.freeze(['a', 'b', 'c'] as const);
     const expectedOutput = ['a', 'b', 'c'] as const;
 
@@ -16,7 +16,7 @@ describe('pipeToArray()', () => {
     expect(actualOutput).not.toBe(input);
   });
 
-  it('should convert lone enumerable to entities', () => {
+  it('should convert enumerable with no operators to entities', () => {
     const inputMap = new Map([ ['a', 1], ['b', 2] ] as const);
 
     const actualOutput = pipeToArray(inputMap);
